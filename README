@@ -1,0 +1,42 @@
+Here are various scenarios how to get workstation
+box operational as soon as possible.
+
+= Workstation
+
+..is a systems with personal tools required to do
+the job. Mine are::
+
+  (browser: all firefox, google-chrome)
+  git
+  hg
+  vim
+
+== Workstation in Fedora 17
+
+  git
+  hg
+  vim
+
+  google-chrome
+
+= Bootstraping workstation
+== ..With Chef on Linux
+
+Bootstrap Chef (tested: Fedora 17):
+  sudo yum install rubygems ruby-devel gcc
+  sudo gem install chef --no-ri --no-rdoc
+
+Use chef-solo for bootstrapping. For the intro see
+http://wiki.opscode.com/display/chef/Chef+Solo
+
+
+chef-solo can be run with local recipe when offline
+or using configuration directly from GitHub
+(TODO: check).
+
+Locally (from this directory):
+  sudo `which chef-solo` -c chef/config-solo.rb
+
+  NOTE: `which` is required, because by default
+        chef-solo is not in PATH for root on Fedora
+ 

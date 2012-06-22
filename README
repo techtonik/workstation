@@ -1,17 +1,26 @@
-Here are various scenarios how to get workstation
-box operational as soon as possible.
+Notes and scenarios how to quickly prepare (development)
+environment for different tasks.
+
 
 = Workstation
 
-..is a systems with personal tools required to do
-the job. Mine are::
+..is a box with some operating system and personal tools
+needeed to do the job.
+
+The basic stuff I expect to see on every Linux machine:
 
   (browser: all firefox, google-chrome)
   git
   hg
   vim
 
-== Workstation in Fedora 17
+Windows is the same, except that vim is replaced with
+Far Manager + Colorer.
+
+Below are these requirements adapted for the clean
+installs of some operating systems.
+
+== Workstation: Linux, Fedora 17
 
   git
   hg
@@ -19,16 +28,40 @@ the job. Mine are::
 
   google-chrome
 
-= Bootstraping workstation
-== ..With Chef on Linux
 
-Bootstrap Chef (tested: Fedora 17):
+= Bootstraping workstations
+== ..with Chef Solo on Linux
+
+Chef Solo is a standalone tool of Chef framework
+(framework for infrastructure automation). Meant as
+a simple alternative to full Chef client/server and
+workstation stack, it is crippled. For example, knife
+- tool to manage cookbooks and more - doesn't work
+with it.
+
+Chef Solo docs are at:
+http://wiki.opscode.com/display/chef/Chef+Solo
+
+The power of Chef is in reusable (and usually cross-
+platform) Cookbooks that are already available. For
+example, you probably don't know exact package names
+for installing 'vim' on different systems. This is
+already written in external cookbook. You can manually
+download it, but it suxx. Probably with Chef server it
+is easier, but because Chef Solo is crippled, you need a
+tool to manage these external cookbooks - a good tool is
+Librarian-Chef.
+
+=== 1. install Chef (solo is included) and Librarian
+
+(tested: Fedora 17, Chef 10.12.0):
   sudo yum install rubygems ruby-devel gcc
   sudo gem install chef --no-ri --no-rdoc
 
-Use chef-solo for bootstrapping. For the intro see
-http://wiki.opscode.com/display/chef/Chef+Solo
+Install Librarian for managing external cookbooks:
+  sudo gem install librarian
 
+=== 2. bootstrap
 
 chef-solo can be run with local recipe when offline
 or using configuration directly from GitHub
@@ -39,4 +72,6 @@ Locally (from this directory):
 
   NOTE: `which` is required, because by default
         chef-solo is not in PATH for root on Fedora
- 
+
+
+(TODO: can Chef parse recipe and find unused cookbooks?)

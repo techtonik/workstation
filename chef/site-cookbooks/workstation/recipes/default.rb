@@ -12,4 +12,17 @@ cookroot = File.dirname(thiscook) + "/cookbooks"
 
 git cookroot+"/vim" do
   repository "git://github.com/opscode-cookbooks/vim.git"
+  notifies :run, "script[chef restart]"
 end
+
+script "chef restart" do
+  action :nothing
+  interpreter "python"
+  code "import sys; sys.exit('New Cookbooks downloaded. Please restart.')"
+end
+
+execute "stub" do
+  action :nothing
+  include_recipe 'vim'
+end
+

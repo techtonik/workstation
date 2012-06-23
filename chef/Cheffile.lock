@@ -1,0 +1,10 @@
+GIT
+  remote: https://github.com/opscode-cookbooks/vim
+  ref: master
+  sha: 789bfcd847c20a5cc719b2e6bef8961d6e9cf16c
+  specs:
+    vim (1.0.2)
+
+DEPENDENCIES
+  vim (>= 0)
+

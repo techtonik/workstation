@@ -1,0 +1,5 @@
+# Librarian-Chef configuration file for managing cookbooks/ directory
+#site 'http://community.opscode.com/api/v1'
+
+cookbook 'vim',
+  :git => 'https://github.com/opscode-cookbooks/vim'

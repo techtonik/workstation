@@ -32,6 +32,18 @@ installs of some operating systems.
 = Bootstraping workstations
 == ..with Chef Solo on Linux
 
+Too long/didn't read:
+
+  git clone git://github.com/techtonik/workstation.git
+  cd workstation/chef
+  sudo yum install rubygems ruby-devel gcc
+  sudo gem install chef --no-ri --no-rdoc
+  sudo gem install librarian
+  librarian install
+  sudo `which chef-solo` -c config-solo.rb
+  
+Now in more detail.
+
 Chef Solo is a standalone tool of Chef framework
 (framework for infrastructure automation). Meant as
 a simple alternative to full Chef client/server and
@@ -61,17 +73,35 @@ Librarian-Chef.
 Install Librarian for managing external cookbooks:
   sudo gem install librarian
 
-=== 2. bootstrap
+=== 2. bootstrap - download cookbooks, run chef
 
-chef-solo can be run with local recipe when offline
-or using configuration directly from GitHub
-(TODO: check).
+Chef-Solo is crippled, so it can not download dependent
+cookbooks. This is made by Librarian-Chef, who reads its
+own configuration Cheffile.
 
-Locally (from this directory):
-  sudo `which chef-solo` -c chef/config-solo.rb
+First you need to create/get Chef Repository, where you
+create Cheffile. Mine is here:
 
-  NOTE: `which` is required, because by default
-        chef-solo is not in PATH for root on Fedora
+  git clone git://github.com/techtonik/workstation.git
+  cd workstation
+
+Fetch dependencies:
+
+  librarian install
+
+Run chef-solo for local repository:
+
+  sudo `which chef-solo` -c config-solo.rb
+
+`which` is required here, because by default chef-solo is
+not in PATH for `root` user on Fedora. 
+
+Notes: When started I hoped that I could just install
+chef-solo and run it against remote GitHub URL so that it
+could get recipe, figure out dependent cookbooks, resolve
+dependencies, download them and run. In Chef 10.12.0 this
+scenario is not ready (yet?).
+
+=== 3. enjoy cooking solo
 
 
-(TODO: can Chef parse recipe and find unused cookbooks?)

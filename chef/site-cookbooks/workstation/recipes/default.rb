@@ -1,6 +1,7 @@
 Chef::Log.info('--- Install basic packages ---')
 package 'git'
 package 'mercurial'
+package 'subversion'
 
 Chef::Log.info('--- Packages by external cookbooks ---')
 # external cookbooks are specified in Cheffile managed

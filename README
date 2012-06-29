@@ -38,8 +38,8 @@ Too long/didn't read:
   cd workstation/chef
   sudo yum install rubygems ruby-devel gcc
   sudo gem install chef --no-ri --no-rdoc
-  sudo gem install librarian
-  librarian install
+  sudo gem install librarian --no-ri --no-rdoc
+  librarian-chef install
   sudo `which chef-solo` -c config-solo.rb
   
 Now in more detail.
@@ -83,11 +83,11 @@ First you need to create/get Chef Repository, where you
 create Cheffile. Mine is here:
 
   git clone git://github.com/techtonik/workstation.git
-  cd workstation
+  cd workstation/chef
 
 Fetch dependencies:
 
-  librarian install
+  librarian-chef install
 
 Run chef-solo for local repository:
 

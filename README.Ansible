@@ -1,5 +1,4 @@
-Notes and scenarios how to quickly prepare (development)
-environment for different tasks.
+Quickly prepare (development) environment with Ansible.
 
 
 = Workstation
@@ -20,7 +19,7 @@ Far Manager + Colorer.
 Below are these requirements adapted for the clean
 installs of some operating systems.
 
-== Workstation: Linux, Fedora 17
+== Workstation: Linux, Ubuntu 13.04
 
   git
   hg
@@ -30,54 +29,97 @@ installs of some operating systems.
 
 
 = Bootstraping workstations
-== ..with Chef Solo on Linux
+== ..with Ansible on Linux (Ubuntu 13.04)
 
 Too long/didn't read:
 
+  sudo apt-get install ansible
   git clone git://github.com/techtonik/workstation.git
-  cd workstation/chef
-  sudo yum install rubygems ruby-devel gcc
-  sudo gem install chef --no-ri --no-rdoc
-  sudo gem install librarian --no-ri --no-rdoc
-  librarian-chef install
-  sudo `which chef-solo` -c config-solo.rb
+  cd workstation/ansible
+  ansible localhost -i hosts -a uname
+
+--- WIP ---
   
 Now in more detail.
 
-Chef Solo is a standalone tool of Chef framework
-(framework for infrastructure automation). Meant as
-a simple alternative to full Chef client/server and
-workstation stack, it is crippled. For example, knife
-- tool to manage cookbooks and more - doesn't work
-with it.
+At the most basic level Ansible is a command line tool
+that runs playbooks. Playbook is a configuration file
+that (unlike shell script) can be automatically parsed,
+checked and changed with various tools. Ansible is one
+such tool.
 
-Chef Solo docs are at:
-http://wiki.opscode.com/display/chef/Chef+Solo
+Ansible runs playbooks over network. It takes playbook
+from local machine, connects to remote through ssh and
+executes instructions there.
 
-The power of Chef is in reusable (and usually cross-
-platform) Cookbooks that are already available. For
-example, you probably don't know exact package names
-for installing 'vim' on different systems. This is
-already written in external cookbook. You can manually
-download it, but it suxx. Probably with Chef server it
-is easier, but because Chef Solo is crippled, you need a
-tool to manage these external cookbooks - a good tool is
-Librarian-Chef.
+Ansible docs are located at:
+http://www.ansibleworks.com/docs/
 
-=== 1. install Chef (solo is included) and Librarian
+To operate, Ansible needs a file with network
+definition called "inventory file" usually located at
+/etc/ansible/hosts
 
-(tested: Fedora 17, Chef 10.12.0):
-  sudo yum install rubygems ruby-devel gcc
-  sudo gem install chef --no-ri --no-rdoc
 
-Install Librarian for managing external cookbooks:
-  sudo gem install librarian
+-- WIP --
 
-=== 2. bootstrap - download cookbooks, run chef
+Comparison - Chef Cookbooks // Ansible Playbooks:
+[ ] reusability
+[ ] cross-platformedness
+[ ] availability
+[ ] dependent books
 
-Chef-Solo is crippled, so it can not download dependent
-cookbooks. This is made by Librarian-Chef, who reads its
-own configuration Cheffile.
+Example when you don't know exact package names to install
+'vim' on different systems.
+
+=== 1. install Ansible
+
+(tested: Ubuntu 13.04, Ansible 1.2):
+  sudo apt-get install ansible
+
+=== 2. create hosts configuration file
+
+It doesn't seem possible to specify unknown host to run
+playbook from command line. Ansible needs to know hosts
+beforehand, and for that you have to create inventory
+configuration file. Standard location is
+/etc/ansible/hosts, but it is possible to place it
+anywhere.
+
+  vim ansible/hosts
+
+The contents of the file for my machine:
+
+  $ cat ansible/localhost
+
+=== 3. run Ansible and SSH commands
+
+Now you can run ansible (you may need to setup SSH):
+
+  $ ansible localhost -i ansible/hosts -a uname
+  localhost | success | rc=0 >>
+  Linux
+
+Here `localhost` is a mask, `-a uname` is a parameter to
+default `command` module that executes `uname`.
+
+Ansible commands are grouped into modules. For example,
+there is a module named `ping` to check connections:
+
+  $ ansible localhost -i ansible/hosts -m ping
+  localhost | success >> {
+      "changed": false, 
+      "ping": "pong"
+  }
+
+"changed" value contains Ansible guess if machine state
+was changed or not. "ping" is a result specific to ping
+module, which is a standard "pong" response.
+
+For a list of Ansible modules see:
+http://www.ansibleworks.com/docs/modules.html
+
+=== 
+
 
 First you need to create/get Chef Repository, where you
 create Cheffile. Mine is here:

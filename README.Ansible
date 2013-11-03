@@ -35,42 +35,88 @@ Too long/didn't read:
 
   sudo apt-get install ansible
   git clone git://github.com/techtonik/workstation.git
-  cd workstation/ansible
-  ansible localhost -i hosts -a uname
+  cd workstation
 
---- WIP ---
-  
-Now in more detail.
+  # execute command `uname` on machine `localhost`,
+  # which is configured in `workstation/ansible/hosts`
+  ansible localhost -i ansible/hosts -a uname
 
-At the most basic level Ansible is a command line tool
-that runs playbooks. Playbook is a configuration file
-that (unlike shell script) can be automatically parsed,
-checked and changed with various tools. Ansible is one
-such tool.
+  # [ ] install everything that is needed
 
+== ..details ==
+Feel free to skip ..details it's about  basic concepts.
+You may start with example and return when ready.
+
+=== command line tool ===
+`ansible` is a command line tool that run stuff on
+remote host. Stuff is packed into `modules` (-m), and
+fine-tuned (selected) using module arguments (-a).
+Default module is `command`, so these two commands
+that execute `uname` on all configured hosts are equal:
+
+  ansible '*' -i ansible/hosts -a uname
+  ansible all -i ansible/hosts -m command -a uname
+
+To ping all configured hosts, execute `ping` module:
+
+  ansible all -i ansible/hosts -m ping
+
+=== inventory ===
+This `hosts` file is called "inventory file" and holds
+network description. It is usually located at
+/etc/ansible/hosts, but here it is local (-i).
+
+  $ cat ansible/hosts
+  localhost 
+
+Inventory file is required - you can't run commands on
+arbitrary machine - it should be present in inventory.
+This might keep you from mistake, but the real reason
+is that everything in ansible is build around server
+names and groups in inventory.
+
+=== inventory for playbook ===
+It is because the primary function of Ansible is
+running playbooks, not single commands. Playbook is a
+config file in YAML format that (unlike shell script)
+can be automatically parsed, checked and changed with
+tools that can handle YAML. Ansible is one such tool.
+
+Playbooks usually contain rules or commands (tasks)
+that are executed on *specific* hosts. Host list is a
+requires attribute of any playbook - the list can be
+hardcoded or sent as parameter. Rules in playbook
+often require that specific kinds of servers are
+present (database, for example) so the rules are very
+tightly interconnected and tied to the structure of
+your inventory. It would be rather hard to specify all
+those servers each time on the command line.
+
+=== remote execution ===
 Ansible runs playbooks over network. It takes playbook
-from local machine, connects to remote through ssh and
+from local machine, connects to remote through SSH and
 executes instructions there.
 
+Yes, you need SSH access before you can do anything
+even on local machine. 
+
+=== documentation ===
 Ansible docs are located at:
 http://www.ansibleworks.com/docs/
 
-To operate, Ansible needs a file with network
-definition called "inventory file" usually located at
-/etc/ansible/hosts
-
-
--- WIP --
-
++-- WIP --
 Comparison - Chef Cookbooks // Ansible Playbooks:
 [ ] reusability
 [ ] cross-platformedness
 [ ] availability
 [ ] dependent books
+Questions:
+[ ] when you don't know exact package names to
+    install 'vim' and 'mysql' on different systems
+    (Fedora: `vim-enhanced` and `community-mysql`)
+/-- WIP --
 
-Example when you don't know exact package names to install
-'vim' on different systems.
-
+== ..example ==
 === 1. install Ansible
 
 (tested: Ubuntu 13.04, Ansible 1.2):
@@ -118,32 +164,22 @@ module, which is a standard "pong" response.
 For a list of Ansible modules see:
 http://www.ansibleworks.com/docs/modules.html
 
-=== 
+=== 4. run playbook
+
+Playbook contains command definitions and host specifiers.
+It is executed by `ansible-playbook` command. This tools
+doesn't accept host masks. Instead it is written inside
+playbook file (which is in YAML format, btw).
+
+Create playbook:
+
+  $ vim playbook.yml
+  $ cat playbook.yml
+  ---
+  - hosts: localhost
+  - 
 
 
-First you need to create/get Chef Repository, where you
-create Cheffile. Mine is here:
 
-  git clone git://github.com/techtonik/workstation.git
-  cd workstation/chef
-
-Fetch dependencies:
-
-  librarian-chef install
-
-Run chef-solo for local repository:
-
-  sudo `which chef-solo` -c config-solo.rb
-
-`which` is required here, because by default chef-solo is
-not in PATH for `root` user on Fedora. 
-
-Notes: When started I hoped that I could just install
-chef-solo and run it against remote GitHub URL so that it
-could get recipe, figure out dependent cookbooks, resolve
-dependencies, download them and run. In Chef 10.12.0 this
-scenario is not ready (yet?).
-
-=== 3. enjoy cooking solo
 
 

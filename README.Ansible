@@ -64,7 +64,7 @@ To ping all configured hosts, execute `ping` module:
 === inventory ===
 This `hosts` file is called "inventory file" and holds
 network description. It is usually located at
-/etc/ansible/hosts, but here it is local (-i).
+/etc/ansible/hosts, but can be anywhere (-i option).
 
   $ cat ansible/hosts
   localhost 
@@ -92,13 +92,18 @@ tightly interconnected and tied to the structure of
 your inventory. It would be rather hard to specify all
 those servers each time on the command line.
 
-=== remote execution ===
+=== remote and local execution ===
 Ansible runs playbooks over network. It takes playbook
-from local machine, connects to remote through SSH and
-executes instructions there.
+from local machine, connects to remote machine through
+SSH and executes instructions there.
 
-Yes, you need SSH access before you can do anything
-even on local machine. 
+SSH access is not necessary when you executing
+commands on local machine, but you need to specify
+`--connection local` from command line explicitly. It
+is possible to specify connection in `hosts`.
+
+  $ cat ansible/hosts
+  localhost ansible_connection=local
 
 === documentation ===
 Ansible docs are located at:
@@ -119,23 +124,25 @@ Questions:
 == ..example ==
 === 1. install Ansible
 
-(tested: Ubuntu 13.04, Ansible 1.2):
+(tested: Ubuntu 13.10, Ansible 1.3):
   sudo apt-get install ansible
+
+The 1.3 version is not available for Ubuntu 13.10, so
+you need to install it from backports. I install it
+from my own ppa:techtonik/ansible
 
 === 2. create hosts configuration file
 
-It doesn't seem possible to specify unknown host to run
-playbook from command line. Ansible needs to know hosts
-beforehand, and for that you have to create inventory
-configuration file. Standard location is
-/etc/ansible/hosts, but it is possible to place it
-anywhere.
+Ansible needs to know hosts before it can execute
+anything, for that you have to create inventory
+configuration file.
 
   vim ansible/hosts
 
 The contents of the file for my machine:
 
-  $ cat ansible/localhost
+  $ cat ansible/host
+  localhost
 
 === 3. run Ansible and SSH commands
 

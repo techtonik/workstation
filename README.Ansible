@@ -124,36 +124,53 @@ Questions:
 == ..example ==
 === 1. install Ansible
 
-(tested: Ubuntu 13.10, Ansible 1.3):
+- Ubuntu (13.10, Ansible 1.3):
+
   sudo apt-get install ansible
 
 The 1.3 version is not available for Ubuntu 13.10, so
 you need to install it from backports. I install it
 from my own ppa:techtonik/ansible
 
+- Fedora (19, Ansible 1.3):
+
+  sudo yum install ansible
+
 === 2. create hosts configuration file
 
-Ansible needs to know hosts before it can execute
-anything, for that you have to create inventory
-configuration file.
-
-  vim ansible/hosts
+  $ vim ansible/hosts
 
 The contents of the file for my machine:
 
-  $ cat ansible/host
+  $ cat ansible/hosts
   localhost
 
-=== 3. run Ansible and SSH commands
-
-Now you can run ansible (you may need to setup SSH):
+=== 3. run Ansible locally
 
   $ ansible localhost -i ansible/hosts -a uname
+  localhost | FAILED => SSH encountered an unknown error during the connection.
+
+This means that Ansible tries to connect through SSH
+and it is not working. For local machine SSH is not
+necessary:
+
+  $ ansible localhost -i ansible/hosts -c local -a uname
   localhost | success | rc=0 >>
   Linux
 
-Here `localhost` is a mask, `-a uname` is a parameter to
-default `command` module that executes `uname`.
+Here `localhost` is a mask - you can use '*' or 'all'
+to run command on every host from inventory file.
+`-a uname` is a parameter to default `command` module
+that executes `uname`. `-c local` makes Ansible
+execute all commands locally.
+
+To avoid typing `-c local` every time, connection type
+for localhost can be specified in `ansible/hosts`:
+
+  $ cat ansible/hosts
+  localhost ansible_connection=local
+
+== 4. explore modules
 
 Ansible commands are grouped into modules. For example,
 there is a module named `ping` to check connections:

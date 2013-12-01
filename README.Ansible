@@ -190,15 +190,16 @@ http://www.ansibleworks.com/docs/modules.html
 
 === 4. run playbook
 
-Playbook contains command definitions and host specifiers.
-It is executed by `ansible-playbook` command. This tools
-doesn't accept host masks. Instead it is written inside
-playbook file (which is in YAML format, btw).
+Playbook contains commands to run on specific hosts or
+groups of hosts configured in inventory file. To run
+playbook, use `ansible-playbook` command. Playbooks
+already specify which hosts they need to run commands
+on, so you don't need to do this from command line.
+Playbook is written in subset of YAML format.
 
 Create playbook:
 
-  $ vim playbook.yml
-  $ cat playbook.yml
+  $ cat ansible/playbook.yml
   ---
   - hosts: localhost
   - 

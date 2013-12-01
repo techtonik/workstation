@@ -1,8 +1,13 @@
 ---
 - hosts: localhost
   tasks:
-  - name: require git, mercurial and subversion
+  - name: ubuntu/debian - require git, mercurial and subversion
     apt: pkg=git
     apt: pkg=mercurial
     apt: pkg=subversion
+  - name: fedora - require git, mercurial and subversion
+    yum: name=git
+    yum: name=mercurial
+    yum: name=subversion
+   
 

@@ -13,11 +13,8 @@ The basic stuff I expect to see on every Linux machine:
   hg
   vim
 
-Windows is the same, except that vim is replaced with
-Far Manager + Colorer.
-
-Below are these requirements adapted for the clean
-installs of some operating systems.
+On Windows the list is same, except vim is replaced with
+Far Manager + Colorer. 
 
 == Workstation: Linux, Ubuntu 13.04
 
@@ -197,14 +194,33 @@ already specify which hosts they need to run commands
 on, so you don't need to do this from command line.
 Playbook is written in subset of YAML format.
 
+  $ cd ansible
+
 Create playbook:
 
-  $ cat ansible/playbook.yml
+  $ cat playbook.yml
   ---
   - hosts: localhost
-  - 
+    tasks:
+    - name: require git, mercurial and subversion
+      apt: pkg=git
+      apt: pkg=mercurial
+      apt: pkg=subversion
 
+Run playbook:
 
+  $ ansible-playbook -i hosts playbook.yml
 
+This playbook executes `apt` module which checks if a
+given package is installed and installs it. Note that
+it still needs inventory file to operate.
 
+==== playbook syntax is YAML
 
+The '---' separator marks the start of the 'playbook',
+' - ' is an list element (like HTML <li> tag), and at
+the root level playbook is a list of 'play's. 'play'
+is further divided into 'tasks'.
+
+More info:
+http://www.ansibleworks.com/docs/YAMLSyntax.html

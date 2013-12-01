@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  tasks:
+  - name: require git, mercurial and subversion
+    apt: pkg=git
+    apt: pkg=mercurial
+    apt: pkg=subversion
+

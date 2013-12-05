@@ -198,6 +198,7 @@ Playbook is written in subset of YAML format.
 
 Create playbook:
 
+  $ vim playbook.yml
   $ cat playbook.yml
   ---
   - hosts: localhost
@@ -215,6 +216,23 @@ This playbook executes `apt` module which checks if a
 given package is installed and installs it. Note that
 it still needs inventory file to operate.
 
+To avoid passing `-i hosts` every time, it may be
+possible to create ansible.cfg configuration file in
+playbook directory after [ ] ansible issue #5115 is
+fixed.
+
+  $ cd ..
+  $ vim ansible/ansible.cfg
+  $ cat ansible/ansible.cfg
+  [defaults]
+  hostfile = ./hosts
+
+And it still won't help, because relative path to hosts
+file is not properly expanded too at the moment. Need
+another bug to fill after.
+
+http://www.ansibleworks.com/docs/intro_configuration.html
+
 ==== playbook syntax is YAML
 
 The '---' separator marks the start of the 'playbook',
@@ -222,5 +240,4 @@ The '---' separator marks the start of the 'playbook',
 the root level playbook is a list of 'play's. 'play'
 is further divided into 'tasks'.
 
-More info:
 http://www.ansibleworks.com/docs/YAMLSyntax.html

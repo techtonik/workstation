@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  tasks:
+  # --- install software
+  - name: ubuntu/debian - require git, mercurial and subversion
+    apt: pkg={{ item }}
+    with_items:
+     - git
+     - mercurial
+     - subversion
+    when: ansible_os_family == "Debian"
+
+  - name: fedora - require git, mercurial and subversion
+    yum: name={{ item }}
+    with_items:
+     - git
+     - mercurial
+     - subversion
+    when: ansible_os_family == "RedHat"
+

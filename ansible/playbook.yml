@@ -22,3 +22,11 @@
     with_items: common_packages + redhat_packages
     when: ansible_os_family == "RedHat"
 
+  # --- checkout software from sources
+  - name: hg extensions in ~/.hgext
+    file: path=~/.hgext state=directory
+
+  - name: fetch hgsubversion
+    hg: dest=~/.hgext/hgsubversion repo=https://bitbucket.org/durin42/hgsubversion
+  - name: enable hgsubversion
+    ini_file: dest=~/.hgrc section=extensions option=hgsubversion value=~/.hgext/hgsubversion/hgsubversion

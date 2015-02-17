@@ -5,19 +5,26 @@
      - git
      - mercurial
      - subversion
+
+     - lxc
+
+     - python-virtualenv
     debian_packages:  # names spacific for Ubuntu/Debian
      - mercurial-git
     redhat_packages:  # names from RedHat/Fedora
      - hg-git
 
+     - lxc-extra
+     - pv
+
   tasks:
   # --- install software
-  - name: ubuntu/debian - require git, mercurial and subversion
+  - name: ubuntu/debian - install packages
     apt: pkg={{ item }}
     with_items: common_packages + debian_packages
     when: ansible_os_family == "Debian"
 
-  - name: fedora - require git, mercurial and subversion
+  - name: fedora - install packages
     yum: name={{ item }}
     with_items: common_packages + redhat_packages
     when: ansible_os_family == "RedHat"

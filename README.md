@@ -4,6 +4,8 @@
 * mercurial
 * [https://github.com/CERN-CERT/WAD](https://github.com/CERN-CERT/WAD)
 * TODO: some commandline linkchecker
+  * https://pypi.python.org/pypi/existence/0.2.6
+    * [ ] patch to work with URLs
 
 ### Goals
 

@@ -1,11 +1,23 @@
-Notes and scenarios how to quickly prepare (development)
-environment for different tasks.
+### Shortlist
 
+* git
+* mercurial
+* [https://github.com/CERN-CERT/WAD](https://github.com/CERN-CERT/WAD)
+* TODO: some commandline linkchecker
 
-= Workstation
+### Goals
 
-..is a box with some operating system and personal tools
-needeed to do the job.
+* gather scenarios on how to quickly prepare (development)
+environment for different tasks
+
+* improve user experience for such scenarios
+
+* collect list of those "different tasks"
+
+### Workstation
+
+..is a box (deck) with some operating system and personal
+tools to do the job.
 
 The basic stuff I expect to see on every Linux machine:
 

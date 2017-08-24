@@ -6,6 +6,12 @@
 * TODO: some commandline linkchecker
   * https://pypi.python.org/pypi/existence/0.2.6
     * [ ] patch to work with URLs
+* ps_mem
+<!-- list above will get extra newlines without this comment before code section -->
+
+    # install globally into /usr/local/bin
+    # -O - get filename from URL
+    curl -O https://raw.githubusercontent.com/pixelb/ps_mem/master/ps_mem.py && chmod +x ps_mem.py && sudo mv ps_mem.py /usr/local/bin/
 
 ### Gateways
 

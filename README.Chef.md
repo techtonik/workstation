@@ -2,7 +2,7 @@ Notes and scenarios how to quickly prepare (development)
 environment for different tasks.
 
 
-= Workstation
+### Workstation
 
 ..is a box with some operating system and personal tools
 needeed to do the job.
@@ -20,7 +20,7 @@ Far Manager + Colorer.
 Below are these requirements adapted for the clean
 installs of some operating systems.
 
-== Workstation: Linux, Fedora 17
+#### Workstation: Linux, Fedora 17
 
   git
   hg
@@ -29,8 +29,7 @@ installs of some operating systems.
   google-chrome
 
 
-= Bootstraping workstations
-== ..with Chef Solo on Linux
+### Bootstraping ..with Chef Solo on Linux
 
 Too long/didn't read:
 
@@ -64,7 +63,7 @@ is easier, but because Chef Solo is crippled, you need a
 tool to manage these external cookbooks - a good tool is
 Librarian-Chef.
 
-=== 1. install Chef (solo is included) and Librarian
+#### 1. install Chef (solo is included) and Librarian
 
 (tested: Fedora 17, Chef 10.12.0):
   sudo yum install rubygems ruby-devel gcc
@@ -73,7 +72,7 @@ Librarian-Chef.
 Install Librarian for managing external cookbooks:
   sudo gem install librarian
 
-=== 2. bootstrap - download cookbooks, run chef
+#### 2. bootstrap - download cookbooks, run chef
 
 Chef-Solo is crippled, so it can not download dependent
 cookbooks. This is made by Librarian-Chef, who reads its
@@ -102,6 +101,20 @@ could get recipe, figure out dependent cookbooks, resolve
 dependencies, download them and run. In Chef 10.12.0 this
 scenario is not ready (yet?).
 
-=== 3. enjoy cooking solo
+#### 3. enjoy cooking solo
+
+### Chef questions / notes.
+
+1. config.rb file for chef-solo is unable to detect errors in names like
+     json_attrs = root + "/config-solo.json"
+   or
+     json_attrs root + "/config-solo.json"
+   instead of
+     json_attribs root + "/config-solo.json"
+
+2. how to access current cookbook path for externally maintained books?
+
+3. while writing a chef-solo recipe, where to see values for accessible attributes?
+
 
 

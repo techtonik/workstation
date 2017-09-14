@@ -2,7 +2,7 @@
 
 * git
   * git-extras
-    * git pr
+    * [git pr](https://github.com/tj/git-extras/blob/master/Commands.md#git-pr)
 * mercurial
 * vim
 * micro

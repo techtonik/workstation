@@ -5,7 +5,7 @@
     * [git pr](https://github.com/tj/git-extras/blob/master/Commands.md#git-pr)
 * mercurial
 * vim
-* micro
+* [micro](https://micro-editor.github.io/)
 * [WAD](https://github.com/CERN-CERT/WAD)
 * TODO: some commandline linkchecker
   * https://pypi.python.org/pypi/existence/0.2.6
@@ -36,7 +36,7 @@ environment for different tasks
 tools to do the job.
 
 The basic stuff I expect to see on every Linux machine is
-listed in [Shortlist](#Shortlist)
+listed in [Shortlist](#shortlist)
 
 Some dependencies are non-crossplatorm. For example, on
 Windows I want vim replaced with Far Manager + Colorer.

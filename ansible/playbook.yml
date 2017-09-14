@@ -5,12 +5,12 @@
      - git
      - mercurial
      - subversion
-
-     - lxc
-
-     - python-virtualenv
+     
     debian_packages:  # names spacific for Ubuntu/Debian
      - mercurial-git
+     - git-extras     # git pr
+     - lxd-client
+     
     redhat_packages:  # names from RedHat/Fedora
      - hg-git
 

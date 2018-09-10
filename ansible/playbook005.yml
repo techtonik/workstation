@@ -14,11 +14,11 @@
   # --- install software
   - name: ubuntu/debian - require git, mercurial and subversion
     apt: pkg={{ item }}
-    with_items: common_packages + debian_packages
+    with_items: "{{ common_packages + debian_packages }}"
     when: ansible_os_family == "Debian"
 
   - name: fedora - require git, mercurial and subversion
     yum: name={{ item }}
-    with_items: common_packages + redhat_packages
+    with_items: "{{ common_packages + redhat_packages }}"
     when: ansible_os_family == "RedHat"
 

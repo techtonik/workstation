@@ -21,12 +21,12 @@
   # --- install software
   - name: ubuntu/debian - install packages
     apt: pkg={{ item }}
-    with_items: common_packages + debian_packages
+    with_items:  "{{ common_packages + debian_packages }}"
     when: ansible_os_family == "Debian"
 
   - name: fedora - install packages
     yum: name={{ item }}
-    with_items: common_packages + redhat_packages
+    with_items: "{{ common_packages + redhat_packages }}"
     when: ansible_os_family == "RedHat"
 
   # --- checkout software from sources

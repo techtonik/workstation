@@ -2,13 +2,17 @@
 - hosts: localhost
   tasks:
   - name: ubuntu/debian - require git, mercurial and subversion
-    apt: pkg=git
-    apt: pkg=mercurial
-    apt: pkg=subversion
+    apt:
+      package:
+      - git
+      - mercurial
+      - subversion
     when: ansible_os_family == "Debian"
   - name: fedora - require git, mercurial and subversion
-    yum: name=git
-    yum: name=mercurial
-    yum: name=subversion
+    yum:
+      name:
+      - git
+      - mercurial
+      - subversion
     when: ansible_os_family == "RedHat"
 

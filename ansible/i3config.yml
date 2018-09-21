@@ -27,4 +27,7 @@
       marker: "{mark}"
       marker_begin: "\n# --- custom settings (ansible) ---"
       marker_end: "# /-- custom settings ---\n"
+    # a workaround for blockinfile not detecting marker with newline
+    # https://github.com/ansible/ansible/issues/38417
+    when: blocktext not in configtext
 

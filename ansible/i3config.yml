@@ -14,16 +14,16 @@
   vars:
     configpath: "{{ lookup('env', 'HOME') }}/.config/i3/config"
     configtext: "{{ lookup('file', configpath) }}"
+    blocktext: |
+        # enable volume control with multimedia keys
+        bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+        bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 
   tasks:
   - name: enable volume control with multimedia keys
     blockinfile:
       path: "{{ configpath }}"
-      block: |
-        # enable volume control with multimedia keys
-        bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-        bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-
+      block: "{{ blocktext }}"
       marker: "{mark}"
       marker_begin: "\n# --- custom settings (ansible) ---"
       marker_end: "# /-- custom settings ---\n"

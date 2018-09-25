@@ -7,7 +7,7 @@
 #
 
 #
-# $ ansible localhost -m debug -a msg="{{ lookup('env', 'HOME') }}"
+# [ ] add volume indicator
 #   
 
 - hosts: localhost
@@ -19,16 +19,23 @@
         # enable volume control with multimedia keys
         bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
         bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+    - |-
+        # enable mute key
+        bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+    - |-
+        # Ctrl+Shift+PrtScrn to select and copy screen to clipboard
+        bindsym Control+Shift+Print exec gnome-screenshot --area --clipboard
 
   tasks:
-  - name: enable volume control with multimedia keys
+  - name: custom i3 configuration
     blockinfile:
       path: "{{ configpath }}"
-      block: "{{ blocks[0] }}"
+      block: "{{ item }}"
       marker: "{mark}"
       marker_begin: "\n# --- custom settings (ansible) ---"
       marker_end: "# /-- custom settings ---\n"
     # a workaround for blockinfile not detecting marker with newline
     # https://github.com/ansible/ansible/issues/38417
-    when: blocks[0] not in configtext
+    when: item not in configtext
+    loop: "{{ blocks }}"
 

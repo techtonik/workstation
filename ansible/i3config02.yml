@@ -1,0 +1,41 @@
+---
+#
+# i3 window manager doesn't support configs that are split over
+# multiple files. one of the reasons for that is that it is hard to
+# trace overrides. anyway, this ansible playbook inserts independent
+# setting blocks inside ~/.config/i3/config
+#
+
+#
+# [ ] add volume indicator
+#   
+
+- hosts: localhost
+  vars:
+    configpath: "{{ lookup('env', 'HOME') }}/.config/i3/config"
+    configtext: "{{ lookup('file', configpath) }}"
+    blocks:
+    - |-
+        # enable volume control with multimedia keys
+        bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+        bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+    - |-
+        # enable mute key
+        bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+    - |-
+        # Ctrl+Shift+PrtScrn to select and copy screen to clipboard
+        bindsym Control+Shift+Print exec gnome-screenshot --area --clipboard
+
+  tasks:
+  - name: custom i3 configuration
+    blockinfile:
+      path: "{{ configpath }}"
+      block: "{{ item }}"
+      marker: "{mark}"
+      marker_begin: "\n# --- custom settings (ansible) ---"
+      marker_end: "# /-- custom settings ---\n"
+    # a workaround for blockinfile not detecting marker with newline
+    # https://github.com/ansible/ansible/issues/38417
+    when: item not in configtext
+    loop: "{{ blocks }}"
+

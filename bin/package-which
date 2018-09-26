@@ -1,0 +1,4 @@
+#!/bin/sh
+
+dpkg -S `which $1`
+

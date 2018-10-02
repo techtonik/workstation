@@ -1,4 +1,11 @@
-### Shortlist
+Experiments with different automation tools for speedy
+bootstrap of Linux workstation. **Ansible** scripts are
+more easily maintained, so it's the winner for now.
+`Chef` scripts and notes are preserved in `chef/`
+subdirectory. `bin/` subdir contains helpers that should
+be copied to `$HOME/bin` as-is.
+
+### Software shortlist
 
 * git
   * git-extras

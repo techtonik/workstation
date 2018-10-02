@@ -1,5 +1,4 @@
-Notes and scenarios how to quickly prepare (development)
-environment for different tasks.
+Notes about quickly preparing workstation with Chef.
 
 
 ### Workstation

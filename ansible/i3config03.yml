@@ -7,7 +7,7 @@
 #
 
 #
-#  ansible-playbook --ask-become-pass i3config.yml
+#  ansible-playbook -K i3config003.yml
 #   
 
 - hosts: localhost

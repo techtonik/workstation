@@ -4,9 +4,9 @@
     common_packages:  # these have the same name on all systems
      - git
      - mercurial
-     - subversion
+     - vim
      
-    debian_packages:  # names spacific for Ubuntu/Debian
+    debian_packages:  # names specific for Ubuntu/Debian
      - mercurial-git
      - git-extras     # git pr
      - lxd-client
@@ -35,5 +35,5 @@
 
   - name: fetch hgsubversion
     hg: dest=~/.hgext/hgsubversion repo=https://bitbucket.org/durin42/hgsubversion
-  - name: enable hgsubversion
-    ini_file: dest=~/.hgrc section=extensions option=hgsubversion value=~/.hgext/hgsubversion/hgsubversion
+  #  - name: enable hgsubversion
+  #    ini_file: dest=~/.hgrc section=extensions option=hgsubversion value=~/.hgext/hgsubversion/hgsubversion

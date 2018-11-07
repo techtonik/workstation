@@ -5,6 +5,7 @@
      - git
      - mercurial
      - vim
+     - ranger
      
     debian_packages:  # names specific for Ubuntu/Debian
      - mercurial-git

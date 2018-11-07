@@ -45,4 +45,9 @@
     # https://github.com/ansible/ansible/issues/38417
     when: item not in configtext
     loop: "{{ blocks }}"
+    notify: reload i3
+
+  handlers:
+  - name: reload i3
+    command: i3 reload
 

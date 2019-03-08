@@ -12,6 +12,7 @@
      - mercurial-git
      - git-extras     # git pr
      - lxd-client
+     - apt-listchanges  # https://askubuntu.com/questions/272215/seeing-apt-get-changelogs-for-to-be-upgraded-packages
      
     redhat_packages:  # names from RedHat/Fedora
      - hg-git

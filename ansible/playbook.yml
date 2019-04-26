@@ -7,6 +7,7 @@
      - vim
      - ranger
      - neofetch
+     - entr
      
     debian_packages:  # names specific for Ubuntu/Debian
      - mercurial-git

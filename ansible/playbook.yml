@@ -8,6 +8,7 @@
      - ranger
      - neofetch
      - entr
+     - fd-find
      
     debian_packages:  # names specific for Ubuntu/Debian
      - mercurial-git
@@ -24,13 +25,11 @@
   tasks:
   # --- install software
   - name: ubuntu/debian - install packages
-    apt: pkg={{ item }}
-    with_items:  "{{ common_packages + debian_packages }}"
+    apt: pkg="{{ common_packages + debian_packages }}"
     when: ansible_os_family == "Debian"
 
   - name: fedora - install packages
-    yum: name={{ item }}
-    with_items: "{{ common_packages + redhat_packages }}"
+    yum: name="{{ common_packages + redhat_packages }}"
     when: ansible_os_family == "RedHat"
 
   # --- checkout software from sources

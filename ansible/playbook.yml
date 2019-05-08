@@ -9,6 +9,7 @@
      - neofetch
      - entr
      - fd-find
+     - p7zip
      
     debian_packages:  # names specific for Ubuntu/Debian
      - mercurial-git

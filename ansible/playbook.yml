@@ -16,12 +16,14 @@
      - git-extras     # git pr
      - lxd-client
      - apt-listchanges  # https://askubuntu.com/questions/272215/seeing-apt-get-changelogs-for-to-be-upgraded-packages
+     - silversearcher-ag
      
     redhat_packages:  # names from RedHat/Fedora
      - hg-git
 
      - lxc-extra
      - pv
+     - the_silver_searcher
 
   tasks:
   # --- install software

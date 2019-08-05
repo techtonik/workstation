@@ -33,6 +33,16 @@
     yum: name="{{ common_packages + redhat_packages }}"
     when: ansible_os_family == "RedHat"
 
+  # --- add common aliases
+  - name: alias fdfind -> fd for Ubuntu/Debian
+    file:
+      src: "/usr/bin/fdfind"
+      dest: "{{ ansible_env.HOME }}/bin/fd"
+      state: link
+    #debug: var=ansible_env.HOME
+    when: ansible_os_family == "Debian"
+
+
   # --- checkout software from sources
   - name: hg extensions in ~/.hgext
     file: path=~/.hgext state=directory

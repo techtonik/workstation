@@ -28,7 +28,9 @@
   tasks:
   # --- install software
   - name: ubuntu/debian - install packages
-    apt: pkg="{{ common_packages + debian_packages }}"
+    apt:
+      pkg: "{{ common_packages + debian_packages }}"
+      force_apt_get: yes
     when: ansible_os_family == "Debian"
 
   - name: fedora - install packages

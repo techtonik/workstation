@@ -12,15 +12,12 @@
      - p7zip
      
     debian_packages:  # names specific for Ubuntu/Debian
-     - mercurial-git
      - git-extras     # git pr
      - lxd-client
      - apt-listchanges  # https://askubuntu.com/questions/272215/seeing-apt-get-changelogs-for-to-be-upgraded-packages
      - silversearcher-ag
      
     redhat_packages:  # names from RedHat/Fedora
-     - hg-git
-
      - lxc-extra
      - pv
      - the_silver_searcher
@@ -57,3 +54,6 @@
     hg: dest=~/.hgext/hgsubversion repo=https://bitbucket.org/durin42/hgsubversion
   #  - name: enable hgsubversion
   #    ini_file: dest=~/.hgrc section=extensions option=hgsubversion value=~/.hgext/hgsubversion/hgsubversion
+
+  - name: fetch hg-git
+    hg: dest=~/.hgext/hg-git repo=https://foss.heptapod.net/mercurial/hg-git

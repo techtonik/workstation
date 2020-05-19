@@ -31,10 +31,12 @@
     apt:
       pkg: "{{ common_packages + debian_packages }}"
       force_apt_get: yes
+    become: yes
     when: ansible_os_family == "Debian"
 
   - name: fedora - install packages
     yum: name="{{ common_packages + redhat_packages }}"
+    become: yes
     when: ansible_os_family == "RedHat"
 
   # --- add common aliases

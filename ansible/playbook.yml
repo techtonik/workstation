@@ -57,3 +57,6 @@
 
   - name: fetch hg-git
     hg: dest=~/.hgext/hg-git repo=https://foss.heptapod.net/mercurial/hg-git
+
+  - name: enable hg mq
+    ini_file: dest=~/.hgrc section=extensions option=mq value=

@@ -5,5 +5,5 @@ ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DIR="$ROOT/ansible"
 
 #ANSIBLE_DISPLAY_ARGS_TO_STDOUT=True
-ANSIBLE_LOG_PATH=ansible.log ansible-playbook -v -i "$DIR/hosts" "$DIR/playbook.yml" $@
+ANSIBLE_LOG_PATH=ansible.log ansible-playbook -v -i "$DIR/hosts" "$DIR/playbook.yml" --ask-become-pass $@
 

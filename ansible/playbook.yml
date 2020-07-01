@@ -36,6 +36,28 @@
     become: yes
     when: ansible_os_family == "RedHat"
 
+
+  # --- install by downloading binaries
+  - name: check latest watchexec
+    uri:
+      url: https://api.github.com/repos/watchexec/watchexec/releases/latest
+      return_content: true
+    register: watchexec_latest
+    no_log: True
+  - name: "installing watchexec {{ watchexec_latest.json.tag_name }}"
+    loop: "{{ watchexec_latest.json.assets }}"
+    when: "'x86_64-unknown-linux-musl.tar.xz' in item.name"
+    unarchive:
+      remote_src: yes
+      src: "{{ item.browser_download_url }}"
+      dest: "{{ ansible_env.HOME }}/bin/"
+      keep_newer: yes
+      extra_opts:
+      - --strip=1
+      - --no-anchored
+      - watchexec
+
+
   # --- add common aliases
   - name: alias fdfind -> fd for Ubuntu/Debian
     file:

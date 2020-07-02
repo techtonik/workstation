@@ -1,9 +1,15 @@
-Experiments with different automation tools for speedy
-bootstrap of Linux workstation. **Ansible** scripts are
-more easily maintained, so it's the winner for now.
-`Chef` scripts and notes are preserved in `chef/`
-subdirectory. `bin/` subdir contains helpers that should
-be copied to `$HOME/bin` as-is.
+### TL;DR
+```
+./ansible.sh 
+```
+
+---
+
+Here I did experiments with different automation tools for
+speedy bootstrap of Linux workstation. **Ansible** scripts were
+an easy win, and I stuck with it. `Chef` scripts and notes are
+preserved in `chef/` subdirectory. `bin/` contains helpers that
+should be copied to `$HOME/bin` as-is.
 
 ### Software shortlist
 

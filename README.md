@@ -1,6 +1,6 @@
 ### TL;DR
 ```
-./ansible.sh 
+./ansible.sh
 ```
 
 ---

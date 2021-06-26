@@ -72,11 +72,6 @@
   - name: hg extensions in ~/.hgext
     file: path=~/.hgext state=directory
 
-  - name: fetch hgsubversion
-    hg: dest=~/.hgext/hgsubversion repo=https://bitbucket.org/durin42/hgsubversion
-  #  - name: enable hgsubversion
-  #    ini_file: dest=~/.hgrc section=extensions option=hgsubversion value=~/.hgext/hgsubversion/hgsubversion
-
   - name: fetch hg-git
     hg: dest=~/.hgext/hg-git repo=https://foss.heptapod.net/mercurial/hg-git
 

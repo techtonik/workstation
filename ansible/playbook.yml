@@ -13,7 +13,6 @@
      
     debian_packages:  # names specific for Ubuntu/Debian
      - git-extras     # git pr
-     - lxd-client
      - apt-listchanges  # https://askubuntu.com/questions/272215/seeing-apt-get-changelogs-for-to-be-upgraded-packages
      - silversearcher-ag
      

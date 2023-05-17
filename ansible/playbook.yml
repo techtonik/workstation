@@ -45,7 +45,7 @@
     no_log: True
   - name: "installing watchexec {{ watchexec_latest.json.tag_name }}"
     loop: "{{ watchexec_latest.json.assets }}"
-    when: "'x86_64-unknown-linux-musl.tar.xz' in item.name"
+    when: "item.name.endswith('x86_64-unknown-linux-musl.tar.xz')"
     unarchive:
       remote_src: yes
       src: "{{ item.browser_download_url }}"

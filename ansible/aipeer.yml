@@ -1,0 +1,17 @@
+#!/usr/bin/env ansible-playbook --ask-become-pass
+---
+#
+# setup `ollama` user with SSH login for port forwarding
+#
+
+#
+#  ansible-playbook --ask-become-pass aipeer.yml
+#   
+
+- hosts: localhost
+  tasks:
+  - name: create `ollama` user
+    user:
+      comment: ollama SSH
+      name: ollama
+    become: yes

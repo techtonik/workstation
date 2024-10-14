@@ -15,3 +15,9 @@
       comment: ollama SSH
       name: ollama
     become: yes
+  - name: add SSH keys
+    lineinfile:
+      path: /home/ollama/.ssh/authorized_keys
+      create: true
+      line: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINB9j4XCWGM8fIqupgHjAecSXqgOEQ2OzSPNQSSOTA8G"
+    become: yes
